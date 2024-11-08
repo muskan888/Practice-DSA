@@ -16,14 +16,14 @@ public:
             else{
                  int len=1;
                 int ele=it+1;
-               if(st.find(it+1)!=st.end()){
+           
                 while(st.find(ele)!=st.end()){
                     len++;
 
                     ele++;
                 }
                 maxi=max(maxi,len);
-               }
+               
 
             }
         }
