@@ -8,7 +8,7 @@ public:
             }
             else{
                 st.push(i);
-                cout<<i;
+            
             }
         }
         string ans="";
