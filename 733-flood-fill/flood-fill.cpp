@@ -1,24 +1,21 @@
 class Solution {
 public:
-    void dfs(vector<vector<int>>& image, int x, int y,int oldClr, int newClr){
-        int row = image.size();
-        int col = image[0].size();
-
-        if(x<0 || y<0 || x>=row || y>= col || image[x][y] != oldClr){
+    void dfs(vector<vector<int>>& image, int sr, int sc, int oldColor,int color){
+        if(sr<0 || sr>=image.size() || sc<0 || sc>image.size() || image[sr][sc]!=oldColor){
             return;
         }
+        image[sr][sc]=color;
+        dfs(image,sr+1,sc,oldColor,color); //down
+        dfs(image,sr-1,sc,oldColor,color); //up
+        dfs(image,sr,sc+1,oldColor,color); //right
+        dfs(image,sr,sc-1,oldColor,color); //left
 
-        image[x][y] = newClr;
-        dfs(image, x + 1, y, oldClr, newClr); // Down
-        dfs(image, x - 1, y, oldClr, newClr); // Up
-        dfs(image, x, y + 1, oldClr, newClr); // Right
-        dfs(image, x, y - 1, oldClr, newClr); // Left
-        
     }
     vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
-        int oldClr = image[sr][sc];
-        if(oldClr!=color){
-            dfs(image, sr, sc,oldClr,color);
+        int oldColor=image[sr][sc];
+
+        if(oldColor!=color){
+            dfs(image,sr,sc,oldColor,color);
         }
         return image;
     }
