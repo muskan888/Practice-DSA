@@ -1,31 +1,37 @@
 class Solution {
-    bool check(int node, vector<vector<int>> &adj, vector<int> &color){
-        int m = adj.size();
-        queue<int> q;
+public:
+    bool bfs(vector<vector<int>>&graph,int node,vector<int>&color){
+        queue<int>q;
         q.push(node);
-        color[node] = 0; 
-
+        color[node]=0;
         while(!q.empty()){
-            int x = q.front(); 
+            int curr=q.front();
             q.pop();
-            for(int adjNode: adj[x]){
-                if(color[adjNode] == -1){
-                    color[adjNode] = 1 - color[x];
-                    q.push(adjNode);
+            for(int i=0;i<graph[curr].size();i++){
+                if(color[graph[curr][i]]==color[curr]){
+                    return false;
                 }
-                else if(color[adjNode] == color[x]) return false;
+               if(color[graph[curr][i]]==-1){
+                 color[graph[curr][i]]=1-color[curr]; //if curr color is 0-> adj color=1, if 1 adj=0;
+                q.push(graph[curr][i]);
+                
+               }
+
             }
         }
         return true;
-    }
-public:
-    bool isBipartite(vector<vector<int>>& graph) {
-        int n = graph.size();
-        vector<int> color(n, -1);
+        
 
-        for(int i=0; i<n; i++){
-            if(color[i] == -1){
-                if(!check(i, graph, color)) return false;
+    }
+    bool isBipartite(vector<vector<int>>& graph) {
+        vector<int>color(graph.size(),-1);
+        //graph can be disconnected so we check for every node
+        for(int i=0;i<color.size();i++){
+            if(color[i]==-1){
+                //this covers every starting node
+                if(!bfs(graph,i,color)){
+                    return false;
+                }
             }
         }
         return true;
