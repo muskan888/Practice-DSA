@@ -12,7 +12,9 @@
 class Solution {
 public:
     void createBST(int data,TreeNode*root){
-        
+        if(!root){
+            return;
+        }
         TreeNode *node= new TreeNode(data);
         if(node->val>root->val){
             if(root->right==NULL){
