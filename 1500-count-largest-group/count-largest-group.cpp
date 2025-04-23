@@ -13,7 +13,7 @@ public:
                 mp[sum]++;
             }
         }
-        int maxi=INT_MIN;
+        int maxi=-1;
         for(auto it:mp){
             if(it.second>maxi){
                 maxi=it.second;
