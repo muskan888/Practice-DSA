@@ -13,9 +13,7 @@ public:
             if(j>=strs[0].size()){
                 break;
             }
-            cout<<j<<endl;
             for(int i=1;i<strs.size();i++) {
-                cout<<strs[0][j]<<endl;
                 if(j>=strs[i].size() || strs[i][j]!=strs[0][j]){
                     flag=false;
                     break;
